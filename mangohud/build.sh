@@ -4,27 +4,22 @@ cd "$(dirname "$0")"; REPO=$PWD
 source ./BASE.env
 
 mkdir -p out; rm -f out/*
-podman run --rm -e SRPM="${SRPM}" -v "${REPO}:/work:Z" -w /work --platform linux/aarch64 fedora:44 bash -euxc '
+podman run --rm -e VERSION="${VERSION}" -v "${REPO}:/work:Z" -w /work --platform linux/aarch64 fedora:44 bash -euxc '
     export HOME=/tmp
-    dnf -y install rpm-build rpmdevtools koji "dnf-command(builddep)"
+    dnf -y install rpm-build rpmdevtools spectool "dnf-command(builddep)"
     rpmdev-setuptree
     cat >/etc/rpm/macros.armada <<EOF
 %_buildhost armada-builder
 %packager Armada
 %vendor Armada
 EOF
-    cd /tmp
-    koji download-build --arch=src "${SRPM}"
-    rpm -i "${SRPM}.src.rpm"
-    SPEC=$HOME/rpmbuild/SPECS/mangohud.spec
-    cp /work/patches/0001-Qualcomm-GPU-support.patch /work/patches/0002-SM8550-GPU.patch /work/patches/0003-Battery-name.patch /work/patches/0004-Qualcomm-battery-power-now.patch /work/patches/0005-RAM-name.patch /work/patches/0006-SM8750-Battery.patch $HOME/rpmbuild/SOURCES/
-    # inject patches after stock %prep unpacks rc1 + subprojects (fuzz: rc1 offsets)
-    sed -i "/-D -T -a6/a patch -p1 --fuzz=5 < %{_sourcedir}/0001-Qualcomm-GPU-support.patch\npatch -p1 --fuzz=5 < %{_sourcedir}/0002-SM8550-GPU.patch\npatch -p1 --fuzz=5 < %{_sourcedir}/0003-Battery-name.patch\npatch -p1 --fuzz=5 < %{_sourcedir}/0004-Qualcomm-battery-power-now.patch\npatch -p1 --fuzz=5 < %{_sourcedir}/0005-RAM-name.patch\npatch -p1 --fuzz=5 < %{_sourcedir}/0006-SM8750-Battery.patch" "$SPEC"
-    REL="${SRPM##*-}"   # release from the pinned NVR (e.g. 2.fc44)
-    sed -i "s/^Release:.*%autorelease.*/Release:        ${REL}.armada/" "$SPEC"
-    sed -i "/^%autochangelog/d" "$SPEC"
-    grep -n "fuzz=5" "$SPEC" || { echo "patch injection failed"; exit 1; }
-    dnf -y builddep "$SPEC"
-    rpmbuild -bb "$SPEC"
-    cp $HOME/rpmbuild/RPMS/*/mangohud-[0-9]*.armada.*.rpm /work/out/
+    cp /work/mangohud.spec ~/rpmbuild/SPECS/
+    sed -i "s/^Version:.*/Version:        ${VERSION}/" ~/rpmbuild/SPECS/mangohud.spec
+    cp /work/patches/*.patch ~/rpmbuild/SOURCES/
+    # fetch the upstream tarball
+    spectool -g -R ~/rpmbuild/SPECS/mangohud.spec
+    dnf -y builddep ~/rpmbuild/SPECS/mangohud.spec
+    # meson downloads subprojects from the wraps (__meson_wrap_mode=default + network)
+    rpmbuild -bb ~/rpmbuild/SPECS/mangohud.spec
+    cp ~/rpmbuild/RPMS/*/mangohud-[0-9]*.armada.*.rpm /work/out/
 '
