@@ -1,0 +1,16 @@
+name: decky-loader
+on:
+  push:
+    branches: [main]
+    paths: ['decky-loader/**', 'oci/**', '.github/workflows/decky-loader.yml', '.github/workflows/_package-image.yml', 'toolchain.env']
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+jobs:
+  build:
+    uses: ./.github/workflows/_package-image.yml
+    secrets: inherit
+    with:
+      package: decky-loader

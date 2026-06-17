@@ -9,6 +9,7 @@ pkg="${1:?usage: stage.sh <package>}"
 rm -rf ctx && mkdir -p ctx
 case "${pkg}" in
     extest)       cp extest/out/libextest.so ctx/ ;;
+    decky-loader) mkdir -p ctx/decky-loader && cp -r decky-loader/out/PluginLoader* ctx/decky-loader/ ;;
     kernel)       mkdir -p ctx/kernel && cp kernel/out/armada-kernel-*.tar.zst kernel/out/armada-kernel-*.tar.zst.sha256 ctx/kernel/ ;;
     fex|mesa|mangohud|gamescope|inputplumber) mkdir -p ctx/rpms && cp "${pkg}"/out/*.rpm ctx/rpms/ ;;
     *) echo "unknown package: ${pkg}" >&2; exit 1 ;;
