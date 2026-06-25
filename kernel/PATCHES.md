@@ -14,6 +14,8 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8650/patches/linux/0007-audioreach-Add-dedicated-WSA2-support.patch
 - `patches/0010-msm-resource-cleanup.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/packages/linux/patches/7.0/0010-msm-resource-cleanup.patch
+- `patches/0048-drm-msm-dsi-reparent-byte-pixel-src-to-xo-on-disable.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/b59f018e09f04cc3020d60a93abb990318a551ba/projects/ROCKNIX/devices/SM8750/patches/linux/0048-drm-msm-dsi-reparent-byte-pixel-src-to-xo-on-disable.patch
 - `patches/0015-touchscreen-edt-ft5x06-allow-to-override-input-name.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0015-touchscreen-edt-ft5x06-allow-to-override-input-name.patch
 - `patches/0026-dt-bindings-arm-qcom-ids-Add-SoC-ID-for-CQ8725S.patch`
@@ -73,7 +75,9 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
 - `patches/0056_Xm-Plus-XM91080G-panel.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0056_Xm-Plus-XM91080G-panel.patch
 - `patches/0057_Chipone-ICNA35XX-panel.patch`
-  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0057_Chipone-ICNA35XX-panel.patch
+  source: https://github.com/ROCKNIX/distribution/blob/b59f018e09f04cc3020d60a93abb990318a551ba/projects/ROCKNIX/devices/SM8750/patches/linux/0028-drm-panel-Add-panel-driver-for-Chipone-ICNA35XX-base.patch
+  notes: panel-driver hunk updated to the b59f018e09 version; armada's drm/panel
+  Makefile hunk preserved (accounts for the earlier XM91080G panel).
 - `patches/0057_DDIC-CH13726A-panel.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0057_DDIC-CH13726A-panel.patch
 - `patches/0058_AYN-Odin2-Mini--backlight.patch`
