@@ -5,6 +5,7 @@
 0002-qcom-dispcc-sm8550-Fix-disp_cc_mdss_mdp_clk_src.patch
 #0004-drm-msm-a6xx-Enable-IFPC-on-Adreno-740.patch    # disabled: GMU wedge on a740
 0010-msm-resource-cleanup.patch
+0011-drm-msm-dpu-sm8550-inline-rotation-diagnostics.patch
 0048-drm-msm-dsi-reparent-byte-pixel-src-to-xo-on-disable.patch
 0051-gpu-panel-add-Pocket-ACE-panel-driver.patch
 0052-gpu-panel-add-Pocket-DMG-panel-driver.patch

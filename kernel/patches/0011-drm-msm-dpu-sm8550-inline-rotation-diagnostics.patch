@@ -1,0 +1,146 @@
+--- a/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_9_0_sm8550.h	2026-06-01 11:54:55.000000000 -0400
++++ b/drivers/gpu/drm/msm/disp/dpu1/catalog/dpu_9_0_sm8550.h	2026-07-04 20:08:45.410826382 -0400
+@@ -58,29 +58,29 @@
+ 	{
+ 		.name = "sspp_0", .id = SSPP_VIG0,
+ 		.base = 0x4000, .len = 0x344,
+-		.features = VIG_SDM845_MASK_SDMA,
+-		.sblk = &dpu_vig_sblk_qseed3_3_2,
++		.features = VIG_SC7280_MASK_SDMA,
++		.sblk = &dpu_vig_sblk_qseed3_3_2_sm8550_rot_v2,
+ 		.xin_id = 0,
+ 		.type = SSPP_TYPE_VIG,
+ 	}, {
+ 		.name = "sspp_1", .id = SSPP_VIG1,
+ 		.base = 0x6000, .len = 0x344,
+-		.features = VIG_SDM845_MASK_SDMA,
+-		.sblk = &dpu_vig_sblk_qseed3_3_2,
++		.features = VIG_SC7280_MASK_SDMA,
++		.sblk = &dpu_vig_sblk_qseed3_3_2_sm8550_rot_v2,
+ 		.xin_id = 4,
+ 		.type = SSPP_TYPE_VIG,
+ 	}, {
+ 		.name = "sspp_2", .id = SSPP_VIG2,
+ 		.base = 0x8000, .len = 0x344,
+-		.features = VIG_SDM845_MASK_SDMA,
+-		.sblk = &dpu_vig_sblk_qseed3_3_2,
++		.features = VIG_SC7280_MASK_SDMA,
++		.sblk = &dpu_vig_sblk_qseed3_3_2_sm8550_rot_v2,
+ 		.xin_id = 8,
+ 		.type = SSPP_TYPE_VIG,
+ 	}, {
+ 		.name = "sspp_3", .id = SSPP_VIG3,
+ 		.base = 0xa000, .len = 0x344,
+-		.features = VIG_SDM845_MASK_SDMA,
+-		.sblk = &dpu_vig_sblk_qseed3_3_2,
++		.features = VIG_SC7280_MASK_SDMA,
++		.sblk = &dpu_vig_sblk_qseed3_3_2_sm8550_rot_v2,
+ 		.xin_id = 12,
+ 		.type = SSPP_TYPE_VIG,
+ 	}, {
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.c	2026-06-01 11:54:55.000000000 -0400
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_catalog.c	2026-07-04 20:08:45.461826380 -0400
+@@ -186,8 +186,16 @@
+ };
+ 
+ static const u32 rotation_v2_formats[] = {
++	DRM_FORMAT_XRGB8888,
++	DRM_FORMAT_ARGB8888,
++	DRM_FORMAT_XBGR8888,
++	DRM_FORMAT_ABGR8888,
++	DRM_FORMAT_XRGB2101010,
++	DRM_FORMAT_ARGB2101010,
++	DRM_FORMAT_XBGR2101010,
++	DRM_FORMAT_ABGR2101010,
+ 	DRM_FORMAT_NV12,
+-	/* TODO add formats after validation */
++	/* Diagnostic: validate RGB formats on SM8550 inline rotation. */
+ };
+ 
+ static const u32 wb2_formats_rgb_yuv[] = {
+@@ -309,6 +317,13 @@
+ 	.rot_format_list = rotation_v2_formats,
+ };
+ 
++static const struct dpu_rotation_cfg dpu_rot_sm8550_cfg_v2 = {
++	/* Diagnostic guess: SC7280's 1088 limit rejects 1920x1080 rotation. */
++	.rot_maxheight = 4096,
++	.rot_num_formats = ARRAY_SIZE(rotation_v2_formats),
++	.rot_format_list = rotation_v2_formats,
++};
++
+ static const struct dpu_sspp_sub_blks dpu_vig_sblk_qseed2 =
+ 				_VIG_SBLK_QSEED2();
+ 
+@@ -340,6 +355,10 @@
+ static const struct dpu_sspp_sub_blks dpu_vig_sblk_qseed3_3_2 =
+ 				_VIG_SBLK(SSPP_SCALER_VER(3, 2));
+ 
++static const struct dpu_sspp_sub_blks dpu_vig_sblk_qseed3_3_2_sm8550_rot_v2 =
++			_VIG_SBLK_ROT(SSPP_SCALER_VER(3, 2),
++				      &dpu_rot_sm8550_cfg_v2);
++
+ static const struct dpu_sspp_sub_blks dpu_vig_sblk_qseed3_3_3 =
+ 				_VIG_SBLK(SSPP_SCALER_VER(3, 3));
+ 
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c	2026-06-01 11:54:55.000000000 -0400
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c	2026-07-04 20:08:45.515826377 -0400
+@@ -699,8 +699,11 @@
+ 	size_t num_formats;
+ 	const u32 *supported_formats;
+ 
+-	if (!test_bit(DPU_SSPP_INLINE_ROTATION, &pipe->sspp->cap->features))
++	if (!test_bit(DPU_SSPP_INLINE_ROTATION, &pipe->sspp->cap->features)) {
++		pr_err_ratelimited("dpu inline rotation requested on %s without feature\n",
++				   pipe->sspp->cap->name);
+ 		return -EINVAL;
++	}
+ 
+ 	if (!sblk->rotation_cfg) {
+ 		DPU_ERROR("invalid rotation cfg\n");
+@@ -708,17 +711,25 @@
+ 	}
+ 
+ 	if (drm_rect_width(&src) > sblk->rotation_cfg->rot_maxheight) {
+-		DPU_DEBUG_PLANE(pdpu, "invalid height for inline rot:%d max:%d\n",
+-				src.y2, sblk->rotation_cfg->rot_maxheight);
++		pr_err_ratelimited("dpu inline rotation source width %d exceeds max height %d on %s\n",
++				   drm_rect_width(&src),
++				   sblk->rotation_cfg->rot_maxheight,
++				   pipe->sspp->cap->name);
+ 		return -EINVAL;
+ 	}
+ 
+ 	supported_formats = sblk->rotation_cfg->rot_format_list;
+ 	num_formats = sblk->rotation_cfg->rot_num_formats;
+ 
+-	if (!MSM_FORMAT_IS_UBWC(fmt) ||
+-		!dpu_find_format(fmt->pixel_format, supported_formats, num_formats))
++	if (!MSM_FORMAT_IS_UBWC(fmt))
++		pr_err_ratelimited("dpu inline rotation diagnostic allowing non-UBWC fmt %p4cc on %s\n",
++				   &fmt->pixel_format, pipe->sspp->cap->name);
++
++	if (!dpu_find_format(fmt->pixel_format, supported_formats, num_formats)) {
++		pr_err_ratelimited("dpu inline rotation rejects unsupported fmt %p4cc on %s\n",
++				   &fmt->pixel_format, pipe->sspp->cap->name);
+ 		return -EINVAL;
++	}
+ 
+ 	return 0;
+ }
+@@ -798,6 +809,15 @@
+ 	}
+ 
+ 	if (pipe_cfg->rotation & DRM_MODE_ROTATE_90) {
++		pr_err_ratelimited("dpu inline rotation attempt pipe=%s rot=0x%x fmt=%p4cc modifier=0x%llx fb=%ux%u src="
++				   DRM_RECT_FMT " dst=" DRM_RECT_FMT "\n",
++				   pipe->sspp->cap->name, pipe_cfg->rotation,
++				   &fmt->pixel_format,
++				   (unsigned long long)new_plane_state->fb->modifier,
++				   new_plane_state->fb->width,
++				   new_plane_state->fb->height,
++				   DRM_RECT_ARG(&pipe_cfg->src_rect),
++				   DRM_RECT_ARG(&pipe_cfg->dst_rect));
+ 		ret = dpu_plane_check_inline_rotation(pdpu, pipe, pipe_cfg->src_rect, fmt);
+ 		if (ret)
+ 			return ret;
