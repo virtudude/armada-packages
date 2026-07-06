@@ -220,12 +220,6 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
 - `dts/qcs8550-ayn-thor.dts.patch`
   source: armada
   notes: edits dts/qcs8550-ayn-thor.dts
-- `dts/qcs8550-retroidpocket-rp6.dts.patch`
-  source: armada
-  notes: edits dts/qcs8550-retroidpocket-rp6.dts
-- `dts/qcs8550-retroidpocket-rp6-top-dpad.dts.patch`
-  source: armada
-  notes: edits dts/qcs8550-retroidpocket-rp6-top-dpad.dts
 - `dts/sm8650-ayaneo-common.dtsi.patch`
   source: armada
   notes: edits dts/sm8650-ayaneo-common.dtsi
