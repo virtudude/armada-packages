@@ -26,3 +26,8 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   notes: nested backend can't enumerate host output modes; read
   GAMESCOPE_NESTED_REFRESH_RATES so Steam gets the panel's real refresh
   range (nested gaming session applies the mode switches via the host).
+- `patches/0009-WaylandBackend-fullscreen-on-preferred-output.patch`
+  source: armada
+  notes: nested fullscreen honors -O/--prefer-output so gaming mode lands
+  on the primary panel instead of whichever output the host compositor
+  considered active. Upstream candidate.
