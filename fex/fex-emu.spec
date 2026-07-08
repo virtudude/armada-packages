@@ -49,6 +49,7 @@ SourceLicense: %{fex_license} %{sysroot_license}
 %endif
 
 Patch1:     0001-fexcore-aarch64-workaround-llvm18-ice.patch
+Patch2:     0005-host-thunks-aarch64-char-signed-char.patch
 
 # Bundled dependencies managed as git submodules upstream
 # These are too entangled with the build system to unbundle for now
