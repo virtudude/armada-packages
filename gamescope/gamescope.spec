@@ -33,6 +33,7 @@ Patch:          0004-DRMBackend-Add-GAMESCOPE_FAKE_OUTPUT_MM-env-to-set-c.patch
 Patch:          0005-feature-add-rotation-shader-for-rotating-output.patch
 Patch:          0006-steamcompmgr-fix-gamepad-cursor-sprite-frozen-via-XTest.patch
 Patch:          0007-WaylandBackend-forward-wl_touch-input.patch
+Patch:          0008-WaylandBackend-nested-refresh-rates-env.patch
 
 BuildRequires:  cmake
 BuildRequires:  catch-devel

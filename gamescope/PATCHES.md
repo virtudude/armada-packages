@@ -21,3 +21,8 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   notes: nested (Wayland backend) gamescope never requested wl_touch, so
   touchscreens were dead when gamescope runs inside a desktop session
   (dual-screen nested gaming). Upstream candidate.
+- `patches/0008-WaylandBackend-nested-refresh-rates-env.patch`
+  source: armada
+  notes: nested backend can't enumerate host output modes; read
+  GAMESCOPE_NESTED_REFRESH_RATES so Steam gets the panel's real refresh
+  range (nested gaming session applies the mode switches via the host).
