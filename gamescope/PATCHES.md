@@ -16,3 +16,18 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   source: https://github.com/ROCKNIX/distribution/blob/d5991e155a1941c248c8bcb9b364723eec75fc61/projects/ROCKNIX/packages/apps/gamescope/patches/0005-feature-add-rotation-shader-for-rotating-output.patch
 - `patches/0006-steamcompmgr-fix-gamepad-cursor-sprite-frozen-via-XTest.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e108ad2b8971b4e332d7457b75dd21dadb666d19/projects/ROCKNIX/packages/apps/gamescope/patches/0006-steamcompmgr-fix-gamepad-cursor-sprite-frozen-via-XTest.patch
+- `patches/0007-WaylandBackend-forward-wl_touch-input.patch`
+  source: armada
+  notes: nested (Wayland backend) gamescope never requested wl_touch, so
+  touchscreens were dead when gamescope runs inside a desktop session
+  (dual-screen nested gaming). Upstream candidate.
+- `patches/0008-WaylandBackend-nested-refresh-rates-env.patch`
+  source: armada
+  notes: nested backend can't enumerate host output modes; read
+  GAMESCOPE_NESTED_REFRESH_RATES so Steam gets the panel's real refresh
+  range (nested gaming session applies the mode switches via the host).
+- `patches/0009-WaylandBackend-fullscreen-on-preferred-output.patch`
+  source: armada
+  notes: nested fullscreen honors -O/--prefer-output so gaming mode lands
+  on the primary panel instead of whichever output the host compositor
+  considered active. Upstream candidate.

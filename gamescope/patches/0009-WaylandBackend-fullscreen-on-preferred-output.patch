@@ -1,0 +1,74 @@
+From: Bryce Thomas <brycesub@gmail.com>
+Subject: WaylandBackend: fullscreen on the preferred output
+
+The nested backend requested fullscreen with a null output, leaving the
+host compositor to pick whichever output was last active - on dual-screen
+devices gaming mode could land on the wrong panel. Honor -O/--prefer-output
+(first match wins) by tracking wl_output names and passing the matching
+output to the fullscreen request.
+
+--- a/src/Backends/WaylandBackend.cpp
++++ b/src/Backends/WaylandBackend.cpp
+@@ -115,6 +115,8 @@
+ 
+ extern gamescope::ConVar<bool> cv_hdr_enabled;
+ 
++extern const char *g_sOutputName; // -O/--prefer-output (main.cpp)
++
+ namespace gamescope
+ {
+     extern std::shared_ptr<INestedHints::CursorInfo> GetX11HostCursor();
+@@ -384,6 +386,7 @@
+     {
+         int32_t nRefresh = 60;
+         int32_t nScale = 1;
++        std::string sName;
+     };
+ 
+ 
+@@ -731,6 +734,27 @@
+ 
+         void UpdateFullscreenState();
+ 
++        wl_output *FindPreferredOutput()
++        {
++            if ( !g_sOutputName )
++                return nullptr;
++            std::string sPriorities = g_sOutputName;
++            for ( size_t uPos = 0; uPos < sPriorities.size(); )
++            {
++                size_t uEnd = sPriorities.find( ',', uPos );
++                if ( uEnd == std::string::npos )
++                    uEnd = sPriorities.size();
++                std::string_view sName = std::string_view{ sPriorities }.substr( uPos, uEnd - uPos );
++                for ( auto &iter : m_pOutputs )
++                {
++                    if ( iter.second.sName == sName )
++                        return iter.first;
++                }
++                uPos = uEnd + 1;
++            }
++            return nullptr;
++        }
++
+         WaylandOutputInfo *GetOutputInfo( wl_output *pOutput )
+         {
+             auto iter = m_pOutputs.find( pOutput );
+@@ -1072,7 +1096,7 @@
+         if ( m_bDesiredFullscreenState != g_bFullscreen && m_bVisible )
+         {
+             if ( m_bDesiredFullscreenState )
+-                libdecor_frame_set_fullscreen( m_Planes[0].GetFrame(), nullptr );
++                libdecor_frame_set_fullscreen( m_Planes[0].GetFrame(), m_pBackend->FindPreferredOutput() );
+             else
+                 libdecor_frame_unset_fullscreen( m_Planes[0].GetFrame() );
+ 
+@@ -2643,6 +2667,8 @@
+     }
+     void CWaylandBackend::Wayland_Output_Name( wl_output *pOutput, const char *pName )
+     {
++        if ( WaylandOutputInfo *pInfo = GetOutputInfo( pOutput ) )
++            pInfo->sName = pName;
+     }
+     void CWaylandBackend::Wayland_Output_Description( wl_output *pOutput, const char *pDescription )
+     {

@@ -1,0 +1,54 @@
+From: Bryce Thomas <brycesub@gmail.com>
+Subject: WaylandBackend: advertise nested refresh rates from the environment
+
+The nested backend cannot enumerate the host output's modes, so
+GetValidDynamicRefreshRates() was empty and gamescope_control only
+advertised the current rate to Steam, hiding the refresh slider.
+Read GAMESCOPE_NESTED_REFRESH_RATES (comma-separated Hz) so the host
+session can advertise the panel's real rates; it applies the actual
+mode changes out-of-band.
+
+--- a/src/Backends/WaylandBackend.cpp
++++ b/src/Backends/WaylandBackend.cpp
+@@ -465,6 +465,7 @@
+         uint32_t m_uMaxTargetLuminance = 203;
+         displaycolorimetry_t m_DisplayColorimetry = displaycolorimetry_709;
+         std::vector<uint8_t> m_FakeEdid;
++        std::vector<uint32_t> m_ValidRefreshRates;
+ 
+         CWaylandBackend *m_pBackend = nullptr;
+ 
+@@ -1001,6 +1002,24 @@
+         , m_Planes{ this, this, this, this, this, this, this, this }
+     {
+         m_HDRInfo.bAlwaysPatchEdid = true;
++
++        // Nested gamescope cannot enumerate the host output's modes; let the
++        // session advertise the panel's real rates so Steam offers refresh
++        // switching (applied out-of-band by the host session).
++        if ( const char *pszRates = getenv( "GAMESCOPE_NESTED_REFRESH_RATES" ) )
++        {
++            std::string sRates = pszRates;
++            for ( size_t uPos = 0; uPos < sRates.size(); )
++            {
++                size_t uEnd = sRates.find( ',', uPos );
++                if ( uEnd == std::string::npos )
++                    uEnd = sRates.size();
++                int nRate = atoi( sRates.substr( uPos, uEnd - uPos ).c_str() );
++                if ( nRate > 0 )
++                    m_ValidRefreshRates.push_back( (uint32_t)nRate );
++                uPos = uEnd + 1;
++            }
++        }
+     }
+ 
+     CWaylandConnector::~CWaylandConnector()
+@@ -1215,7 +1234,7 @@
+     }
+     std::span<const uint32_t> CWaylandConnector::GetValidDynamicRefreshRates() const
+     {
+-        return std::span<const uint32_t>{};
++        return m_ValidRefreshRates;
+     }
+ 
+     void CWaylandConnector::GetNativeColorimetry(
