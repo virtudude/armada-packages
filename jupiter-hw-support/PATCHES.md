@@ -14,3 +14,8 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   source: armada
   notes: Adds hostname validation before calling `hostnamectl`, and makes the
     SSH helper target `sshd.service` explicitly.
+- `patches/0003-format-with-supported-casefold.patch`
+  source: armada
+  notes: Enables ext4 casefold during formatting only when the running kernel
+    advertises support, preventing the helper from creating a filesystem that
+    the same system cannot mount.

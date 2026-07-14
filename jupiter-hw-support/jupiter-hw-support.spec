@@ -14,6 +14,7 @@ Source1:        org.armada.jupiter-hw-support.policy
 Source2:        50-armada-jupiter-hw-support.rules
 Patch1:         0001-armada-storage-behavior.patch
 Patch2:         0002-armada-polkit-helper-safety.patch
+Patch3:         0003-format-with-supported-casefold.patch
 
 BuildArch:      noarch
 BuildRequires:  systemd-rpm-macros

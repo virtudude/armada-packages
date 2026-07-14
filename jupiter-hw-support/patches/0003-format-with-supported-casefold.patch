@@ -1,0 +1,20 @@
+--- a/usr/lib/hwsupport/format-device.sh
++++ b/usr/lib/hwsupport/format-device.sh
+@@ -140,8 +140,15 @@
+-# Format as EXT4 with casefolding for proton compatibility
++# Format as EXT4 with casefolding for Proton compatibility when supported.
++# ext4 casefold requires CONFIG_UNICODE in the running kernel, so avoid
++# creating a filesystem that the current system cannot mount.
++MKFS_FEATURE_ARGS=()
++if [[ -e /sys/fs/ext4/features/casefold ]]; then
++    MKFS_FEATURE_ARGS=(-O casefold)
++fi
++
+ echo "stage=formatting"
+ sync
+ parted --script "$STORAGE_DEVICE" mklabel gpt mkpart primary 0% 100%
+ sync
+-mkfs.ext4 -m 0 -O casefold -E "$EXTENDED_OPTIONS" "${EXTRA_MKFS_ARGS[@]}" -F "$STORAGE_PARTITION"
++mkfs.ext4 -m 0 "${MKFS_FEATURE_ARGS[@]}" -E "$EXTENDED_OPTIONS" "${EXTRA_MKFS_ARGS[@]}" -F "$STORAGE_PARTITION"
+ sync
+ udevadm settle
