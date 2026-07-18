@@ -261,9 +261,13 @@ CONFIG_STEAM_FF=y
 CONFIG_BT_LE=y
 CONFIG_BT_RFCOMM=m
 
-# ============== Waydroid (binder) ==============
+# ============== Waydroid ==============
 CONFIG_ANDROID_BINDER_IPC=y
 CONFIG_ANDROID_BINDERFS=y
+CONFIG_IPV6=y
+CONFIG_IPV6_MULTIPLE_TABLES=y
+CONFIG_NET_KEY=y
+CONFIG_XFRM_USER=y
 
 # ============== netfilter / nftables (firewalld, Tailscale, WireGuard) ==============
 CONFIG_NF_CONNTRACK=m
