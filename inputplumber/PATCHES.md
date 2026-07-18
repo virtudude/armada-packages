@@ -6,3 +6,5 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
 
 - `patches/0001-fix-CapabilityMap-preserve-signed-axis-button-mappin.patch`
   source: armada
+- `patches/0002-fix-gamepad-honor-passthrough-config-skip-exclusive-grab.patch`
+  source: armada
