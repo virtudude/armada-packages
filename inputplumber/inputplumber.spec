@@ -16,6 +16,7 @@ License:        GPL-3.0-or-later
 URL:            %{forgeurl}
 Source0:        %{forgeurl}/archive/%{commit}/%{name}-%{commit}.tar.gz
 Patch1:         0001-fix-CapabilityMap-preserve-signed-axis-button-mappin.patch
+Patch2:         0002-fix-gamepad-honor-passthrough-config-skip-exclusive-grab.patch
 
 BuildRequires:  cargo
 BuildRequires:  rust
@@ -39,7 +40,8 @@ Requires:       dbus
 %description
 InputPlumber detects, manages, and routes input from handheld gaming devices,
 including combining devices into a single virtual gamepad. armada fork: carries
-the dpad signed-axis-button mapping fix.
+the dpad signed-axis-button mapping fix, and honors 'passthrough' for gamepad
+source devices (upstream only wired it up for keyboard sources).
 
 %prep
 %autosetup -n %{appname}-%{commit} -p1
