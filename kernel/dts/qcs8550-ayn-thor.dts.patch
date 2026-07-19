@@ -11,36 +11,12 @@ From: virtudude <virtudude@protonmail.com>
  
  		label = "top_touchscreen";
  	};
-@@ -368,9 +366,11 @@
- 	clock-frequency = <100000>;
- 	status = "okay";
+@@ -388,8 +386,6 @@
  
-+	/* bottom panel + digitizer disabled; armada drives only the primary */
- 	touchscreen@38 {
- 		compatible = "focaltech,ft5452";
- 		reg = <0x38>;
-+		status = "disabled";
- 		#address-cells = <1>;
- 		#size-cells = <0>;
+ 		touchscreen-size-x = <1080>;
+ 		touchscreen-size-y = <1240>;
+-		touchscreen-swapped-x-y;
+-		touchscreen-inverted-x;
  
-@@ -397,9 +397,10 @@
- 	};
- };
+ 		label = "bottom_touchscreen";
  
-+/* bottom panel disabled; armada drives only the primary */
- &mdss_dsi0 {
- 	vdda-supply = <&vreg_l3e_1p2>;
--	status = "okay";
-+	status = "disabled";
- 
- 	panel@0 {
- 		reg = <0>;
-@@ -433,7 +434,7 @@
- 
- &mdss_dsi0_phy {
- 	vdds-supply = <&vreg_l1e_0p88>;
--	status = "okay";
-+	status = "disabled";
- };
- 
- &mdss_dsi1_out {
