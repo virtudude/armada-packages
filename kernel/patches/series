@@ -15,6 +15,7 @@
 0057_DDIC-CH13726A-panel.patch
 0062-gpu-drm-panel-add-wt0630-panel.patch
 0104-drm-panel-Add-Retroid-Pocket-6-panel.patch
+1030-drm-msm-adreno-defer-first-gpu-init-for-acd-rail-settle.patch
 
 # ============== Panel power + backlight ==============
 0058_AYN-Odin2-Mini--backlight.patch
