@@ -21,7 +21,7 @@ URL:            %{forgeurl}
 Source0:        %{forgeurl}/archive/v%{tarball_version}/%{name}-%{tarball_version}.tar.gz
 
 Patch1:         0001-Qualcomm-GPU-support.patch
-Patch2:         0002-SM8550-GPU.patch
+Patch2:         0002-GPU-monitoring.patch
 Patch3:         0003-Battery-name.patch
 Patch4:         0004-Qualcomm-battery-power-now.patch
 Patch5:         0005-RAM-name.patch
