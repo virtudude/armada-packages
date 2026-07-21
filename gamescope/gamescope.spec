@@ -99,6 +99,8 @@ BuildRequires:  stb_image_write-static
 BuildRequires:  /usr/bin/glslangValidator
 
 Provides:       bundled(vkroots) = 0^20240429git5106d8a
+# Stable feature contract consumed by Armada's image build validation.
+Provides:       armada-gamescope-expose-client-sampleable-formats = 1
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
