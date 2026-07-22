@@ -15,7 +15,6 @@
 0057_DDIC-CH13726A-panel.patch
 0062-gpu-drm-panel-add-wt0630-panel.patch
 0104-drm-panel-Add-Retroid-Pocket-6-panel.patch
-1030-drm-msm-adreno-defer-first-gpu-init-for-acd-rail-settle.patch
 
 # ============== Panel power + backlight ==============
 0058_AYN-Odin2-Mini--backlight.patch
@@ -74,6 +73,7 @@ v6_20260210_quic_utiwari_crypto_qce_add_runtime_pm_and_interconnect_bandwidth_sc
 0102-20240424_wuxilin123_ayn_odin_2_support.patch
 0103_arm64--dts--qcom--sm8550--add-UART15.patch
 0120-20250728_konradybcio_gpu_cc_power_requirements_reality_check.patch
+0121-pmdomain-qcom-rpmhpd-no-max-clamp-on-gmu-rails.patch
 0122-interconnect__qcom__sm8550__Enable_QoS_configuration.patch
 0154-dts-qcom-sm8550-add-opp-acd-level.patch
 0200-ASoC-wcd938x-add-DMIC-DAPM-inputs.patch

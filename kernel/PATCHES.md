@@ -110,6 +110,8 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0104-drm-panel-Add-Retroid-Pocket-6-panel.patch
 - `patches/0120-20250728_konradybcio_gpu_cc_power_requirements_reality_check.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0120-20250728_konradybcio_gpu_cc_power_requirements_reality_check.patch
+- `patches/0121-pmdomain-qcom-rpmhpd-no-max-clamp-on-gmu-rails.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/main/projects/ROCKNIX/devices/SM8550/patches/linux/0121-pmdomain-qcom-rpmhpd-no-max-clamp-on-gmu-rails.patch
 - `patches/0122-interconnect__qcom__sm8550__Enable_QoS_configuration.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0122-interconnect__qcom__sm8550__Enable_QoS_configuration.patch
 - `patches/0154-dts-qcom-sm8550-add-opp-acd-level.patch`
@@ -140,8 +142,6 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/1002-haptics-driver-support-periodic-sine-and-fixes.patch
 - `patches/1003-rsinput-add-ff.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/1003-rsinput-add-ff.patch
-- `patches/1030-drm-msm-adreno-defer-first-gpu-init-for-acd-rail-settle.patch`
-  source: https://github.com/shuuri-labs/pocknix-os/blob/c602f8958d35b4dcb75165e5af533e86b777cc3e/kernel/sm8550/patches/20-sm8550/1030-drm-msm-adreno-defer-first-gpu-init-for-acd-rail-settle.patch
 - `patches/1300-input-rsinput-ranges.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8750/patches/linux/1300-input-rsinput-ranges.patch
 - `patches/20260424_neil_armstrong_arm64_dts_qcom_sm8_456_50_add_missing_cx_power_domain_to_gcc.patch`
