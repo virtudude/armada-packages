@@ -210,7 +210,7 @@ cat > "${STAGE}/lib/modules/${KVER}/.armada-source" <<EOF
 Source: linux-${KERNEL_VERSION} (kernel.org stable)
 Built: armada-builder on ${HOST_ARCH}
 Patches applied: ${APPLIED:-?} (from patches/series)
-DTBs included: $(ls ${DTS_DIR}/*.dts | wc -l) boards (SM8550 + SM8650 + SM8750)
+DTBs included: $(ls ${DTS_DIR}/*.dts | wc -l) boards (SM8250 + SM8550 + SM8650 + SM8750)
 Repackaged for: armada
 EOF
 

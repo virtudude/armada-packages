@@ -157,6 +157,36 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   notes: driver sources verbatim; reworked from an out-of-tree module to an
   in-tree build.
   notes: modified — rebased to apply after the SM8550 panels
+- `patches/0016-rp5-smooth-brightness-adjustment.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0016-rp5-smooth-brightness-adjustment.patch
+- `patches/0004-pm8150b.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0004-pm8150b.patch
+- `patches/0009-qcom-spmi-haptics.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0009-qcom-spmi-haptics.patch
+- `patches/0008-retroid-gamepad.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0008-retroid-gamepad.patch
+- `patches/0013-add-force-feedback.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0013-add-force-feedback.patch
+- `patches/0011-qcom-pm8150b-charger.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0011-qcom-pm8150b-charger.patch
+- `patches/0005-sm8250-uart.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0005-sm8250-uart.patch
+- `patches/9998-gpu-opp-table.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/9998-gpu-opp-table.patch
+- `patches/0001-msm-dsi-restore-wide_bus-bpp-calculation.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0001-msm-dsi-restore-wide_bus-bpp-calculation.patch
+- `patches/0012-ASoC-qcom-q6asm-dai-Change-some-default-periods.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0012-ASoC-qcom-q6asm-dai-Change-some-default-periods.patch
+- `patches/0062_wsa881x-shared-powerdown-gpio.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0062_wsa881x-shared-powerdown-gpio.patch
+- `patches/0100-revert-force-16bit-audio.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0100-revert-force-16bit-audio.patch
+- `patches/0300-batocera-fix-headphone-jack-detection.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0300-batocera-fix-headphone-jack-detection.patch
+- `patches/0102-arm64-dts-qcom-pm8150-Add-nvmem-support-for-PM8150-R.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/0102-arm64-dts-qcom-pm8150-Add-nvmem-support-for-PM8150-R.patch
+- `patches/9999-remove-log-spam.patch`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/patches/linux/9999-remove-log-spam.patch
 - `patches/sm8750-gpucc-clock-controller.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8750/patches/linux/0000_to_0025-linux-7-0_qcom-adreno_waiting-for-upstream.patch
   notes: modified — extracted (gpucc slice) from the ROCKNIX adreno bundle
@@ -198,6 +228,16 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8650/linux/dts/qcom/sm8650-ayaneo-ps2.dts
 - `dts/sm8650-konkr-pf.dts`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8650/linux/dts/qcom/sm8650-konkr-pf.dts
+- `dts/sm8250-retroidpocket-common.dtsi`
+  source: https://github.com/ROCKNIX/distribution/blob/e54f4bfe525eb258aec843d2af32f588731f7368/projects/ROCKNIX/devices/SM8250/linux/dts/qcom/sm8250-retroidpocket-common.dtsi
+- `dts/sm8250-retroidpocket-flip2.dts`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/linux/dts/qcom/sm8250-retroidpocket-flip2.dts
+- `dts/sm8250-retroidpocket-rp5.dts`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/linux/dts/qcom/sm8250-retroidpocket-rp5.dts
+- `dts/sm8250-retroidpocket-rpmini.dts`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/linux/dts/qcom/sm8250-retroidpocket-rpmini.dts
+- `dts/sm8250-retroidpocket-rpminiv2.dts`
+  source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8250/linux/dts/qcom/sm8250-retroidpocket-rpminiv2.dts
 - `dts/cq8725s-ayn-common.dtsi`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8750/patches/linux/0046-arm64-dts-qcom-Add-AYN-CQ8725S-Common.patch
   notes: modified — extracted (the DTS) from this ROCKNIX add-DTS patch

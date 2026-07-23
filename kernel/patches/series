@@ -6,6 +6,7 @@
 0004-drm-msm-a6xx-Enable-IFPC-on-Adreno-740.patch
 0010-msm-resource-cleanup.patch
 0048-drm-msm-dsi-reparent-byte-pixel-src-to-xo-on-disable.patch
+0016-rp5-smooth-brightness-adjustment.patch
 0051-gpu-panel-add-Pocket-ACE-panel-driver.patch
 0052-gpu-panel-add-Pocket-DMG-panel-driver.patch
 0053-gpu-panel-add-Pocket-DS-lower-panel-driver.patch
@@ -91,6 +92,22 @@ v6_20260210_quic_utiwari_crypto_qce_add_runtime_pm_and_interconnect_bandwidth_sc
 v2_20260420_neil_armstrong_arm64_qcom_sm8650_misc_enhancements.patch
 0063-gpu-drm-panel-add-pocket-fit-panel.patch
 0064-add-chipone-tddi-touchscreen.patch
+
+# ============== SM8250 (Retroid Pocket 5, Mini, Mini V2, Flip2) ==============
+0004-pm8150b.patch
+0009-qcom-spmi-haptics.patch
+0008-retroid-gamepad.patch
+0013-add-force-feedback.patch
+0011-qcom-pm8150b-charger.patch
+0005-sm8250-uart.patch
+9998-gpu-opp-table.patch
+0001-msm-dsi-restore-wide_bus-bpp-calculation.patch
+0012-ASoC-qcom-q6asm-dai-Change-some-default-periods.patch
+0062_wsa881x-shared-powerdown-gpio.patch
+0100-revert-force-16bit-audio.patch
+0300-batocera-fix-headphone-jack-detection.patch
+0102-arm64-dts-qcom-pm8150-Add-nvmem-support-for-PM8150-R.patch
+9999-remove-log-spam.patch
 
 # ============== SM8750 (AYN Odin 3) ==============
 0026-dt-bindings-arm-qcom-ids-Add-SoC-ID-for-CQ8725S.patch
