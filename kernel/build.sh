@@ -15,7 +15,7 @@ podman run --rm \
     --platform linux/aarch64 \
     "${BUILDER_IMAGE}" bash -euxc '
         dnf -y install gcc binutils make bc bison flex openssl-devel \
-            elfutils-libelf-devel zstd xz cpio patch curl perl-interpreter python3 \
+            elfutils-libelf-devel dwarves zstd xz cpio patch curl perl-interpreter python3 \
             findutils diffutils gawk grep sed coreutils hostname gzip tar ccache
         WORK_DIR=/tmp/armada-kernel-build OUT_DIR=/work/out \
             bash scripts/build-kernel.sh
