@@ -23,7 +23,7 @@ index c4d63f5..1586ed5 100644
 +            "gpu",
 +            "gpu_thermal", // SM6115
 +            "gpu_top_thermal", // SM8250
-+            "gpuss_0_thermal" // SM8550
++            "gpuss_0_thermal", // SM8550
 +            "gpuss0_thermal", // SM8650/SM8750
 +        };
 +        for (const auto& gpu_path : gpu_paths) {
@@ -42,7 +42,7 @@ index c4d63f5..1586ed5 100644
 +    std::string sys_path;
 +
 +    const std::vector<std::string> sys_paths = {
-+        "/sys/class/kgsl/kgsl-3d0"
++        "/sys/class/kgsl/kgsl-3d0",
 +        "/sys/class/devfreq/5900000.gpu", // SM6115
 +        "/sys/class/devfreq/3d00000.gpu", // SM8250/SM8550/SM8650/SM8750
 +    };
