@@ -8,7 +8,7 @@
 # unusably slow.
 
 registry := env("REGISTRY", "localhost/armada-packages")
-packages := "extest armada-splash inputplumber fex mesa mangohud gamescope networkmanager jupiter-hw-support kernel"
+packages := "extest armada-splash inputplumber fex mesa mangohud gamescope networkmanager jupiter-hw-support scx-scheds kernel"
 
 import? 'Justfile.local'
 
