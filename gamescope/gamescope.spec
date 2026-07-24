@@ -7,7 +7,7 @@
 Name:           gamescope
 # overwritten from BASE.env by build.sh
 Version:        0
-Release:        1%{?dist}.armada
+Release:        2%{?dist}.armada
 Summary:        Micro-compositor for video games on Wayland
 # Automatically converted from old format: BSD - review is highly recommended.
 License:        LicenseRef-Callaway-BSD
@@ -33,6 +33,17 @@ Patch:          0004-DRMBackend-Add-GAMESCOPE_FAKE_OUTPUT_MM-env-to-set-c.patch
 Patch:          0005-feature-add-rotation-shader-for-rotating-output.patch
 Patch:          0006-steamcompmgr-fix-gamepad-cursor-sprite-frozen-via-XTest.patch
 Patch:          0007-steamcompmgr-fallback-appid-focus.patch
+# Allow a device-specific, opt-in known-display profile with qualified physical
+# geometry for EDID-less internal DSI panels.
+Patch:          0008-drm-allow-explicit-edidless-internal-panel-profiles.patch
+# Keep Gamma 2.2 HDR color conversion in Vulkan when DRM cannot perform it.
+Patch:          0009-drm-compose-gamma22-hdr-without-hardware-color-management.patch
+# Advertise only synthetic HDR formats backed by the selected Vulkan surface.
+Patch:          0010-wsi-filter-hdr-formats-by-underlying-support.patch
+# Make Steam's SDR-on-HDR brightness control affect traditional Gamma 2.2 HDR.
+Patch:          0011-color-scale-sdr-white-on-gamma22-hdr-output.patch
+# Allow an opt-in client format set based on Vulkan sampling rather than KMS scanout.
+Patch:          0012-expose-client-sampleable-formats.patch
 
 BuildRequires:  cmake
 BuildRequires:  catch-devel
@@ -88,6 +99,8 @@ BuildRequires:  stb_image_write-static
 BuildRequires:  /usr/bin/glslangValidator
 
 Provides:       bundled(vkroots) = 0^20240429git5106d8a
+# Stable feature contract consumed by Armada's image build validation.
+Provides:       armada-gamescope-expose-client-sampleable-formats = 1
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
@@ -122,12 +135,16 @@ export PKG_CONFIG_PATH=pkgconfig
     -Denable_gamescope=true \
     -Denable_gamescope_wsi_layer=true \
     -Denable_openvr_support=true \
+    -Denable_tests=true \
     -Dforce_fallback_for=[] \
     -Dinput_emulation=enabled \
     -Dpipewire=enabled \
     -Drt_cap=enabled \
     -Dsdl2_backend=enabled
 %meson_build
+
+%check
+%meson_test
 
 %install
 %meson_install --skip-subprojects
