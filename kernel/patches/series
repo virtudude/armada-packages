@@ -15,6 +15,7 @@
 0057_Chipone-ICNA35XX-panel.patch
 0057_DDIC-CH13726A-panel.patch
 0062-gpu-drm-panel-add-wt0630-panel.patch
+0063-gpu-drm-panel-add-wt0600-1080p-single-dsi.patch
 0104-drm-panel-Add-Retroid-Pocket-6-panel.patch
 
 # ============== Panel power + backlight ==============
@@ -32,6 +33,7 @@
 0059_AYN-Odin2-Mini--hynitron--cstxxx.patch
 0060-input-touchscreen-add-synaptics-dsx-kconfig.patch   # keep before the driver
 0060-input-touchscreen-add-synaptics-dsx-driver.patch
+0065-input-goodix-override-resolution-from-dt.patch
 
 # ============== Input / Gamepad ==============
 0031_input--Add-driver-for-RSInput-Gamepad.patch

@@ -1,0 +1,17 @@
+From: virtudude <virtudude@protonmail.com>
+Subject: armada: qcs8550-ayaneo-pockets1k: wire SY7758 enable-gpios for upstream driver
+
+--- a/arch/arm64/boot/dts/qcom/qcs8550-ayaneo-pockets1k.dts
++++ b/arch/arm64/boot/dts/qcom/qcs8550-ayaneo-pockets1k.dts
+@@ -112,9 +112,8 @@
+ 	backlight: sy7758@2e {
+ 		compatible = "silergy,sy7758";
+ 		reg = <0x2e>;
+-		pinctrl-0 = <&backlight_pwr_active>;
+-		pinctrl-1 = <&backlight_pwr_sleep>;
+-		pinctrl-names = "default", "sleep";
++		/* single-pin backlight: gpio41 is the enable; no separate vdd rail to gate */
++		enable-gpios = <&tlmm 41 GPIO_ACTIVE_HIGH>;
+ 		status = "okay";
+ 	};
+ };

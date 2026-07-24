@@ -96,6 +96,10 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0061-regulator-add-sgm3804-i2c-regulator-for-panel-power-.patch
 - `patches/0062-gpu-drm-panel-add-wt0630-panel.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0062-gpu-drm-panel-add-wt0630-panel.patch
+- `patches/0063-gpu-drm-panel-add-wt0600-1080p-single-dsi.patch`
+  source: https://github.com/ddordie/distribution/blob/next/projects/ROCKNIX/devices/SM8550/patches/linux/0063-gpu-drm-panel-add-wt0600-1080p-single-dsi.patch
+- `patches/0065-input-goodix-override-resolution-from-dt.patch`
+  source: https://github.com/ddordie/distribution/blob/next/projects/ROCKNIX/devices/SM8550/patches/linux/0054-input-goodix-override-resolution-from-dt.patch
 - `patches/0071-HACK-fix-usb-boot-hang.patch`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/patches/linux/0071-HACK-fix-usb-boot-hang.patch
 - `patches/0100-SM8550-Fix-L2-cache-for-CPU2-and-add-cache-sizes.patch`
@@ -206,6 +210,8 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/linux/dts/qcom/qcs8550-ayaneo-pocketds.dts
 - `dts/qcs8550-ayaneo-pocketevo.dts`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/linux/dts/qcom/qcs8550-ayaneo-pocketevo.dts
+- `dts/qcs8550-ayaneo-pockets1k.dts`
+  source: https://github.com/ddordie/distribution/blob/next/projects/ROCKNIX/devices/SM8550/linux/dts/qcom/qcs8550-ayaneo-pockets1k.dts
 - `dts/qcs8550-ayaneo-pockets2k.dts`
   source: https://github.com/ROCKNIX/distribution/blob/e485495a942daba186d4a8543e18a1ad09c9a5d5/projects/ROCKNIX/devices/SM8550/linux/dts/qcom/qcs8550-ayaneo-pockets2k.dts
 - `dts/qcs8550-ayn-common.dtsi`
@@ -250,6 +256,9 @@ to a commit, or `armada` if it's original; a URL source with no `notes` is verba
 - `dts/qcs8550-ayaneo-pocketace.dts.patch`
   source: armada
   notes: edits dts/qcs8550-ayaneo-pocketace.dts
+- `dts/qcs8550-ayaneo-pockets1k.dts.patch`
+  source: armada
+  notes: edits dts/qcs8550-ayaneo-pockets1k.dts
 - `dts/qcs8550-ayaneo-pockets2k.dts.patch`
   source: armada
   notes: edits dts/qcs8550-ayaneo-pockets2k.dts
